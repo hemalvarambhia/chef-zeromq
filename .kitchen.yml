@@ -13,3 +13,8 @@ suites:
     run_list:
       - recipe[chef-zeromq::default]
     attributes:
+  - name: with_ruby
+    run_list:
+      - recipe[chef-zeromq::default]
+      - recipe[chef-ruby::default]
+    attributes:
