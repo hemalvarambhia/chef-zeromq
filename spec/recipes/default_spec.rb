@@ -20,4 +20,7 @@ describe "chef-zeromq::default" do
       source: "http://download.zeromq.org/zeromq-4.1.1.tar.gz")
   end
 
+  it "unpacks the source" do
+    expect(chef_run).to run_execute("unpack-zeromq").with(command: "tar -xzf zeromq-4.1.1.tar.gz -C /usr/local/src")
+  end
 end
