@@ -23,4 +23,8 @@ describe "chef-zeromq::default" do
   it "unpacks the source" do
     expect(chef_run).to run_execute("unpack-zeromq").with(command: "tar -xzf zeromq-4.1.1.tar.gz -C /usr/local/src")
   end
+
+  it "builds ZeroMQ from source" do
+    expect(chef_run).to run_execute("build-zeromq").with(command: "./configure --without-libsodium && make", cwd: "/usr/local/src/zeromq-4.1.1")
+  end
 end
