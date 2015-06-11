@@ -10,3 +10,7 @@
 package "libtool" do
   action :install
 end
+
+package "pkg-config" do
+  action :install
+end
