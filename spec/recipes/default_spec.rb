@@ -27,4 +27,8 @@ describe "chef-zeromq::default" do
   it "builds ZeroMQ from source" do
     expect(chef_run).to run_execute("build-zeromq").with(command: "./configure --without-libsodium && make", cwd: "/usr/local/src/zeromq-4.1.1")
   end
+
+  it "install libzmpq-dev" do
+    expect(chef_run).to install_package "libzmq-dev"
+  end
 end

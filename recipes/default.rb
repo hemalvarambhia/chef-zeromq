@@ -40,3 +40,7 @@ execute "build-zeromq" do
   cwd "/usr/local/src/zeromq-4.1.1"
   action :run
 end
+
+package "libzmq-dev" do
+  action :install
+end
