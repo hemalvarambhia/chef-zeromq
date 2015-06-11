@@ -15,5 +15,9 @@ describe "chef-zeromq::default" do
     expect(chef_run).to install_package "automake"
   end
 
+  it "downloads the source code" do
+    expect(chef_run).to create_remote_file("zeromq-4.1.1.tar.gz").with(
+      source: "http://download.zeromq.org/zeromq-4.1.1.tar.gz")
+  end
 
 end

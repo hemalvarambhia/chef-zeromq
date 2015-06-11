@@ -20,3 +20,8 @@ end
 package "automake" do
   action :install
 end
+
+remote_file "zeromq-4.1.1.tar.gz" do
+  source "http://download.zeromq.org/zeromq-4.1.1.tar.gz"
+  action :create
+end
