@@ -18,4 +18,4 @@ suites:
     run_list:
       - recipe[chef-zeromq::default]
       - recipe[chef-ruby::default]
-    attributes:
+    attributes: {ruby: {version: "1.9.2-p320"}}
