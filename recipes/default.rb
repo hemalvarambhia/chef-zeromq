@@ -44,3 +44,10 @@ end
 package "libzmq-dev" do
   action :install
 end
+
+include_recipe "firewall::default"
+firewall_rule "zmq-firewall-rule" do
+  protocol :tcp
+  port 9000
+  action :allow
+end
