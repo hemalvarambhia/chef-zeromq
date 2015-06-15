@@ -16,16 +16,16 @@ describe "chef-zeromq::default" do
   end
 
   it "downloads the source code" do
-    expect(chef_run).to create_remote_file("zeromq-4.1.1.tar.gz").with(
-      source: "http://download.zeromq.org/zeromq-4.1.1.tar.gz")
+    expect(chef_run).to create_remote_file("zeromq-2.2.0.tar.gz").with(
+      source: "http://download.zeromq.org/zeromq-2.2.0.tar.gz")
   end
 
   it "unpacks the source" do
-    expect(chef_run).to run_execute("unpack-zeromq").with(command: "tar -xzf zeromq-4.1.1.tar.gz -C /usr/local/src")
+    expect(chef_run).to run_execute("unpack-zeromq").with(command: "tar -xzf zeromq-2.2.0.tar.gz -C /usr/local/src")
   end
 
   it "builds ZeroMQ from source" do
-    expect(chef_run).to run_execute("build-zeromq").with(command: "./configure --without-libsodium && make", cwd: "/usr/local/src/zeromq-4.1.1")
+    expect(chef_run).to run_execute("build-zeromq").with(command: "./configure --without-libsodium && make && make install", cwd: "/usr/local/src/zeromq-2.2.0")
   end
 
   it "install libzmpq-dev" do
