@@ -59,17 +59,3 @@ execute "ldconfig" do
   user "root"
   action :run
 end
-
-include_recipe "firewall::default"
-
-firewall_rule "zmq-firewall-rule" do
-  protocol :tcp
-  port 9000
-  action :allow
-end
-
-firewall_rule "ssh" do
-  protocol :tcp
-  port 22
-  action :allow
-end
