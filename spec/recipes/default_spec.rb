@@ -3,6 +3,11 @@ require_relative '../spec_helper'
 describe "chef-zeromq::default" do
   let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
   
+  before :each do
+    allow_any_instance_of(Chef::Resource::Execute).to receive(:already_unpacked?).and_return(false) 
+    allow_any_instance_of(Chef::Resource::RemoteFile).to receive(:already_unpacked?).and_return(false)
+  end
+  
   it "updates the apt repo" do
     expect(chef_run).to include_recipe "apt::default"
   end
@@ -39,6 +44,10 @@ describe "chef-zeromq::default" do
   context "firewall" do
     it "allows incoming requests to port 9000" do
       expect(chef_run).to allow_firewall_rule("zmq-firewall-rule").with(protocol: :tcp, port: 9000)
+    end
+
+    it "allows ssh connections" do
+      expect(chef_run).to allow_firewall_rule("ssh").with(protocol: :tcp, port: 22)
     end
   end
 end
