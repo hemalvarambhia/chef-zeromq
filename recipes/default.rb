@@ -45,6 +45,12 @@ package "libzmq-dev" do
   action :install
 end
 
+execute "ldconfig" do
+  cwd "/usr/local/src/zeromq-2.2.0"
+  user "root"
+  action :run
+end
+
 include_recipe "firewall::default"
 firewall_rule "zmq-firewall-rule" do
   protocol :tcp

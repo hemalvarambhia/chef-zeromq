@@ -32,6 +32,10 @@ describe "chef-zeromq::default" do
     expect(chef_run).to install_package "libzmq-dev"
   end
 
+  it "runs ldconfig" do
+    expect(chef_run).to run_execute("ldconfig").with(user: "root", cwd: "/usr/local/src/zeromq-2.2.0")
+  end
+
   context "firewall" do
     it "allows incoming requests to port 9000" do
       expect(chef_run).to allow_firewall_rule("zmq-firewall-rule").with(protocol: :tcp, port: 9000)
