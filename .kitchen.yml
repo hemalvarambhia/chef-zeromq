@@ -14,7 +14,7 @@ suites:
     run_list:
       - recipe[chef-zeromq::default]
     attributes:
-  - name: with_ruby
+  - name: ruby_binding
     run_list:
       - recipe[chef-zeromq::default]
       - recipe[chef-ruby::default]
