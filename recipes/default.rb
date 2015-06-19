@@ -28,25 +28,27 @@ package "uuid-dev" do
   action :install
 end
 
-remote_file "zeromq-#{node[:zeromq][:version]}.tar.gz" do
-  source "http://download.zeromq.org/zeromq-#{node[:zeromq][:version]}.tar.gz"
+zeromq = node[:zeromq]
+
+remote_file "zeromq-#{zeromq[:version]}.tar.gz" do
+  source "http://download.zeromq.org/zeromq-#{zeromq[:version]}.tar.gz"
   action :create
   not_if { already_unpacked? }
 end
 
 execute "unpack-zeromq" do
-  command "tar -xzf zeromq-#{node[:zeromq][:version]}.tar.gz -C #{node[:zeromq][:install_dir]}"
+  command "tar -xzf zeromq-#{zeromq[:version]}.tar.gz -C #{zeromq[:install_dir]}"
   not_if { already_unpacked? }
   action :run
 end
 
-file "#{node[:zeromq][:install_dir]}/zeromq-#{node[:zeromq][:version]}.tar.gz" do
+file "#{zeromq[:install_dir]}/zeromq-#{zeromq[:version]}.tar.gz" do
   action :delete
 end
 
 execute "build-zeromq" do
   command "./configure --without-libsodium && make && make install"
-  cwd "#{node[:zeromq][:install_dir]}/zeromq-#{node[:zeromq][:version]}"
+  cwd "#{zeromq[:install_dir]}/zeromq-#{zeromq[:version]}"
   action :run
 end
 
@@ -55,7 +57,7 @@ package "libzmq-dev" do
 end
 
 execute "ldconfig" do
-  cwd "/usr/local/src/zeromq-#{node[:zeromq][:version]}"
+  cwd "#{zeromq[:install_dir]}/zeromq-#{zeromq[:version]}"
   user "root"
   action :run
 end
