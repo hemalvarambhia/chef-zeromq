@@ -1,2 +1,2 @@
 default[:zeromq][:install_dir] = "/usr/local/src"
-default[:zeromq][:version] = "2.2.0"
+default[:zeromq][:version] = "4.1.1"
